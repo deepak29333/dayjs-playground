@@ -11,7 +11,7 @@ import CodeEditor from './components/CodeEditor';
 import {Analytics} from '@vercel/analytics/react';
 
 function App() {
-  const [activeSection, setActiveSection] = useState('editor');
+  const [activeSection, setActiveSection] = useState('timezone');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const sections = [
