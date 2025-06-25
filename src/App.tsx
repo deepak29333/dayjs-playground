@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Clock, Calendar, Code, Zap, Globe, Calculator, Terminal, Menu, X } from 'lucide-react';
+import React, {useState, useEffect} from 'react';
+import {Clock, Calendar, Code, Zap, Globe, Calculator, Terminal, Menu, X} from 'lucide-react';
 import Header from './components/Header';
 import LiveClock from './components/LiveClock';
 import DateFormatter from './components/DateFormatter';
@@ -8,18 +8,19 @@ import DateComparator from './components/DateComparator';
 import RelativeTime from './components/RelativeTime';
 import TimezoneConverter from './components/TimezoneConverter';
 import CodeEditor from './components/CodeEditor';
+import {Analytics} from '@vercel/analytics/react';
 
 function App() {
   const [activeSection, setActiveSection] = useState('editor');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const sections = [
-    { id: 'timezone', title: 'Timezones', icon: Globe, component: TimezoneConverter },
-    { id: 'editor', title: 'Code Editor', icon: Terminal, component: CodeEditor },
-    { id: 'formatter', title: 'Format Dates', icon: Calendar, component: DateFormatter },
-    { id: 'manipulator', title: 'Manipulate Dates', icon: Calculator, component: DateManipulator },
-    { id: 'comparator', title: 'Compare Dates', icon: Zap, component: DateComparator },
-    { id: 'relative', title: 'Relative Time', icon: Clock, component: RelativeTime },
+    {id: 'timezone', title: 'Timezones', icon: Globe, component: TimezoneConverter},
+    {id: 'editor', title: 'Code Editor', icon: Terminal, component: CodeEditor},
+    {id: 'formatter', title: 'Format Dates', icon: Calendar, component: DateFormatter},
+    {id: 'manipulator', title: 'Manipulate Dates', icon: Calculator, component: DateManipulator},
+    {id: 'comparator', title: 'Compare Dates', icon: Zap, component: DateComparator},
+    {id: 'relative', title: 'Relative Time', icon: Clock, component: RelativeTime},
 
   ];
 
@@ -34,8 +35,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <Header />
-      
+      <Header/>
+      <Analytics/>
       {/* Mobile Navigation Toggle */}
       <div className="lg:hidden sticky top-0 z-40 bg-white shadow-md p-4">
         <div className="flex items-center justify-between">
@@ -46,7 +47,7 @@ function App() {
             onClick={toggleMobileMenu}
             className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-5 h-5"/> : <Menu className="w-5 h-5"/>}
           </button>
         </div>
       </div>
@@ -63,11 +64,11 @@ function App() {
               ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
               <div className="p-4 overflow-y-auto max-h-screen">
-                <LiveClock />
+                <LiveClock/>
 
                 <nav className="mt-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <Code className="w-5 h-5 text-blue-600" />
+                    <Code className="w-5 h-5 text-blue-600"/>
                     Practice Areas
                   </h3>
                   <div className="space-y-2">
@@ -83,7 +84,7 @@ function App() {
                               : 'text-gray-700 hover:bg-gray-100'
                           }`}
                         >
-                          <Icon className="w-5 h-5" />
+                          <Icon className="w-5 h-5"/>
                           {section.title}
                         </button>
                       );
@@ -97,11 +98,11 @@ function App() {
           {/* Desktop Navigation Sidebar */}
           <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-8">
-              <LiveClock />
-              
+              <LiveClock/>
+
               <nav className="mt-6 bg-white rounded-xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                  <Code className="w-5 h-5 text-blue-600" />
+                  <Code className="w-5 h-5 text-blue-600"/>
                   Practice Areas
                 </h3>
                 <div className="space-y-2">
@@ -117,7 +118,7 @@ function App() {
                             : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-5 h-5"/>
                         {section.title}
                       </button>
                     );
@@ -138,7 +139,7 @@ function App() {
                     activeSection === section.id ? 'block' : 'hidden'
                   }`}
                 >
-                  <Component />
+                  <Component/>
                 </div>
               );
             })}
