@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { Globe, MapPin } from 'lucide-react';
+import {Globe, MapPin} from 'lucide-react';
 import CodeExample from './CodeExample';
 
 dayjs.extend(utc);
@@ -180,33 +180,33 @@ const TimezoneConverter: React.FC = () => {
             label: `${label} (UTC${offsetFormatted})`,
             offset: offsetFormatted
           };
-        } catch (err) {
+        } catch (_) {
           // Skip invalid timezones
           return null;
         }
       }).filter((tz): tz is Timezone => tz !== null)
-      .sort((a, b) => {
-        // First by offset
-        if (a.offset !== b.offset) {
-          return a.offset.localeCompare(b.offset);
-        }
-        // Then by name
-        return a.label.localeCompare(b.label);
-      });
+        .sort((a, b) => {
+          // First by offset
+          if (a.offset !== b.offset) {
+            return a.offset.localeCompare(b.offset);
+          }
+          // Then by name
+          return a.label.localeCompare(b.label);
+        });
 
       setTimezones(formattedTimezones);
     } catch (err) {
       console.error('Error processing timezones:', err);
       // Fallback to a minimal list if there's an issue
       const fallbackTimezones = [
-        { value: 'UTC', label: 'UTC (UTC+00:00)', offset: '+00:00' },
-        { value: 'America/New_York', label: 'America / New York (UTC-05:00)', offset: '-05:00' },
-        { value: 'America/Los_Angeles', label: 'America / Los Angeles (UTC-08:00)', offset: '-08:00' },
-        { value: 'Europe/London', label: 'Europe / London (UTC+00:00)', offset: '+00:00' },
-        { value: 'Europe/Paris', label: 'Europe / Paris (UTC+01:00)', offset: '+01:00' },
-        { value: 'Asia/Tokyo', label: 'Asia / Tokyo (UTC+09:00)', offset: '+09:00' },
-        { value: 'Asia/Shanghai', label: 'Asia / Shanghai (UTC+08:00)', offset: '+08:00' },
-        { value: 'Australia/Sydney', label: 'Australia / Sydney (UTC+10:00)', offset: '+10:00' },
+        {value: 'UTC', label: 'UTC (UTC+00:00)', offset: '+00:00'},
+        {value: 'America/New_York', label: 'America / New York (UTC-05:00)', offset: '-05:00'},
+        {value: 'America/Los_Angeles', label: 'America / Los Angeles (UTC-08:00)', offset: '-08:00'},
+        {value: 'Europe/London', label: 'Europe / London (UTC+00:00)', offset: '+00:00'},
+        {value: 'Europe/Paris', label: 'Europe / Paris (UTC+01:00)', offset: '+01:00'},
+        {value: 'Asia/Tokyo', label: 'Asia / Tokyo (UTC+09:00)', offset: '+09:00'},
+        {value: 'Asia/Shanghai', label: 'Asia / Shanghai (UTC+08:00)', offset: '+08:00'},
+        {value: 'Australia/Sydney', label: 'Australia / Sydney (UTC+10:00)', offset: '+10:00'},
       ];
       setTimezones(fallbackTimezones);
     }
@@ -237,15 +237,15 @@ const TimezoneConverter: React.FC = () => {
   // World clocks with major timezones
   const worldClockTimezones = timezones.length > 0
     ? [
-        timezones.find(tz => tz.value === 'UTC') || { value: 'UTC', label: 'UTC', offset: '+00:00' },
-        timezones.find(tz => tz.value === 'America/New_York') || timezones.find(tz => tz.value.includes('New_York')),
-        timezones.find(tz => tz.value === 'America/Los_Angeles') || timezones.find(tz => tz.value.includes('Los_Angeles')),
-        timezones.find(tz => tz.value === 'Europe/London') || timezones.find(tz => tz.value.includes('London')),
-        timezones.find(tz => tz.value === 'Europe/Paris') || timezones.find(tz => tz.value.includes('Paris')),
-        timezones.find(tz => tz.value === 'Asia/Tokyo') || timezones.find(tz => tz.value.includes('Tokyo')),
-        timezones.find(tz => tz.value === 'Asia/Shanghai') || timezones.find(tz => tz.value.includes('Shanghai')),
-        timezones.find(tz => tz.value === 'Australia/Sydney') || timezones.find(tz => tz.value.includes('Sydney')),
-      ].filter((tz): tz is Timezone => tz !== undefined)
+      timezones.find(tz => tz.value === 'UTC') || {value: 'UTC', label: 'UTC', offset: '+00:00'},
+      timezones.find(tz => tz.value === 'America/New_York') || timezones.find(tz => tz.value.includes('New_York')),
+      timezones.find(tz => tz.value === 'America/Los_Angeles') || timezones.find(tz => tz.value.includes('Los_Angeles')),
+      timezones.find(tz => tz.value === 'Europe/London') || timezones.find(tz => tz.value.includes('London')),
+      timezones.find(tz => tz.value === 'Europe/Paris') || timezones.find(tz => tz.value.includes('Paris')),
+      timezones.find(tz => tz.value === 'Asia/Tokyo') || timezones.find(tz => tz.value.includes('Tokyo')),
+      timezones.find(tz => tz.value === 'Asia/Shanghai') || timezones.find(tz => tz.value.includes('Shanghai')),
+      timezones.find(tz => tz.value === 'Australia/Sydney') || timezones.find(tz => tz.value.includes('Sydney')),
+    ].filter((tz): tz is Timezone => tz !== undefined)
     : [];
 
   const inputDateTime = dayjs.tz(inputDate, fromTimezone);
@@ -255,7 +255,7 @@ const TimezoneConverter: React.FC = () => {
     <div className="space-y-6">
       <div className="bg-white rounded-xl shadow-lg p-6">
         <div className="flex items-center gap-2 mb-6">
-          <Globe className="w-6 h-6 text-indigo-600" />
+          <Globe className="w-6 h-6 text-indigo-600"/>
           <h2 className="text-2xl font-bold text-gray-900">Timezone Conversion</h2>
         </div>
 
@@ -277,18 +277,14 @@ const TimezoneConverter: React.FC = () => {
               From Timezone
             </label>
             <div className="relative" ref={fromDropdownRef}>
-              <select
-                value={fromTimezone}
-                onChange={(e) => setFromTimezone(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              <button
+                type="button"
                 onClick={() => setFromDropdownOpen(!fromDropdownOpen)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-left flex justify-between items-center"
               >
-                {timezones.filter(tz => tz.label.toLowerCase().includes(fromSearchQuery.toLowerCase())).map((tz) => (
-                  <option key={tz.value} value={tz.value}>
-                    {tz.label}
-                  </option>
-                ))}
-              </select>
+                <span>{timezones.find(tz => tz.value === fromTimezone)?.label || fromTimezone}</span>
+                <span>▼</span>
+              </button>
 
               {fromDropdownOpen && (
                 <div className="absolute z-10 mt-1 w-full rounded-md bg-white shadow-lg">
@@ -324,18 +320,14 @@ const TimezoneConverter: React.FC = () => {
               To Timezone
             </label>
             <div className="relative" ref={toDropdownRef}>
-              <select
-                value={toTimezone}
-                onChange={(e) => setToTimezone(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              <button
+                type="button"
                 onClick={() => setToDropdownOpen(!toDropdownOpen)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-left flex justify-between items-center"
               >
-                {timezones.filter(tz => tz.label.toLowerCase().includes(toSearchQuery.toLowerCase())).map((tz) => (
-                  <option key={tz.value} value={tz.value}>
-                    {tz.label}
-                  </option>
-                ))}
-              </select>
+                <span>{timezones.find(tz => tz.value === toTimezone)?.label || toTimezone}</span>
+                <span>▼</span>
+              </button>
 
               {toDropdownOpen && (
                 <div className="absolute z-10 mt-1 w-full rounded-md bg-white shadow-lg">
@@ -400,14 +392,15 @@ const TimezoneConverter: React.FC = () => {
 
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-indigo-600" />
+            <MapPin className="w-5 h-5 text-indigo-600"/>
             World Clock
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {worldClockTimezones.map((tz) => {
               const time = dayjs().tz(tz.value);
               return (
-                <div key={tz.value} className="bg-gray-50 rounded-lg p-4 text-center hover:bg-gray-100 transition-colors">
+                <div key={tz.value}
+                     className="bg-gray-50 rounded-lg p-4 text-center hover:bg-gray-100 transition-colors">
                   <div className="font-medium text-gray-900 mb-1">
                     {tz.value.split('/').pop()?.replace(/_/g, ' ')}
                   </div>
@@ -434,35 +427,9 @@ const TimezoneConverter: React.FC = () => {
         </div>
       </div>
 
-      <CodeExample
-        title="Timezone Examples"
-        code={`import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
-// Create a date in a specific timezone
-const date = dayjs.tz('${inputDate}', '${fromTimezone}');
-
-// Convert to another timezone
-const converted = date.tz('${toTimezone}');
-
-console.log('Original:', date.format()); // ${inputDateTime.format()}
-console.log('Converted:', converted.format()); // ${convertedDateTime.format()}
-
-// Current time in different timezones
-console.log('UTC:', dayjs.utc().format()); // ${dayjs.utc().format()}
-console.log('Tokyo:', dayjs().tz('Asia/Tokyo').format()); // ${dayjs().tz('Asia/Tokyo').format()}
-
-// Get timezone offset
-console.log('Offset:', date.utcOffset()); // ${inputDateTime.utcOffset()} minutes`}
-      />
-
       <div className="bg-white rounded-xl shadow-lg p-6 mt-6">
         <div className="flex items-center gap-2 mb-6">
-          <Globe className="w-6 h-6 text-indigo-600" />
+          <Globe className="w-6 h-6 text-indigo-600"/>
           <h2 className="text-2xl font-bold text-gray-900">Timestamp to Date Converter</h2>
         </div>
 
@@ -511,18 +478,14 @@ console.log('Offset:', date.utcOffset()); // ${inputDateTime.utcOffset()} minute
               Target Timezone
             </label>
             <div className="relative" ref={timestampDropdownRef}>
-              <select
-                value={timestampTimezone}
-                onChange={(e) => setTimestampTimezone(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              <button
+                type="button"
                 onClick={() => setTimestampDropdownOpen(!timestampDropdownOpen)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-left flex justify-between items-center"
               >
-                {timezones.filter(tz => tz.label.toLowerCase().includes(timestampSearchQuery.toLowerCase())).map((tz) => (
-                  <option key={tz.value} value={tz.value}>
-                    {tz.label}
-                  </option>
-                ))}
-              </select>
+                <span>{timezones.find(tz => tz.value === timestampTimezone)?.label || timestampTimezone}</span>
+                <span>▼</span>
+              </button>
 
               {timestampDropdownOpen && (
                 <div className="absolute z-10 mt-1 w-full rounded-md bg-white shadow-lg">
@@ -616,14 +579,41 @@ console.log('Offset:', date.utcOffset()); // ${inputDateTime.utcOffset()} minute
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>Unix timestamp in seconds represents the number of seconds since January 1, 1970 (Unix Epoch)</li>
-            <li>Current Unix timestamp in seconds: <span className="font-mono">{Math.floor(Date.now() / 1000)}</span></li>
+            <li>Current Unix timestamp in seconds: <span className="font-mono">{Math.floor(Date.now() / 1000)}</span>
+            </li>
             <li>Current Unix timestamp in milliseconds: <span className="font-mono">{Date.now()}</span></li>
           </ul>
         </div>
       </div>
+
+      <CodeExample
+        title="Timezone Examples"
+        code={`import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+// Create a date in a specific timezone
+const date = dayjs.tz('${inputDate}', '${fromTimezone}');
+
+// Convert to another timezone
+const converted = date.tz('${toTimezone}');
+
+console.log('Original:', date.format()); // ${inputDateTime.format()}
+console.log('Converted:', converted.format()); // ${convertedDateTime.format()}
+
+// Current time in different timezones
+console.log('UTC:', dayjs.utc().format()); // ${dayjs.utc().format()}
+console.log('Tokyo:', dayjs().tz('Asia/Tokyo').format()); // ${dayjs().tz('Asia/Tokyo').format()}
+
+// Get timezone offset
+console.log('Offset:', date.utcOffset()); // ${inputDateTime.utcOffset()} minutes`}
+      />
+
     </div>
   );
 };
 
 export default TimezoneConverter;
-

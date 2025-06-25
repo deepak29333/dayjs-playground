@@ -14,12 +14,13 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const sections = [
+    { id: 'timezone', title: 'Timezones', icon: Globe, component: TimezoneConverter },
     { id: 'editor', title: 'Code Editor', icon: Terminal, component: CodeEditor },
     { id: 'formatter', title: 'Format Dates', icon: Calendar, component: DateFormatter },
     { id: 'manipulator', title: 'Manipulate Dates', icon: Calculator, component: DateManipulator },
     { id: 'comparator', title: 'Compare Dates', icon: Zap, component: DateComparator },
     { id: 'relative', title: 'Relative Time', icon: Clock, component: RelativeTime },
-    { id: 'timezone', title: 'Timezones', icon: Globe, component: TimezoneConverter },
+
   ];
 
   const toggleMobileMenu = () => {
