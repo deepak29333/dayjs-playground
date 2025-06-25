@@ -14,6 +14,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('timezone');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  
   const sections = [
     {id: 'timezone', title: 'Timezones', icon: Globe, component: TimezoneConverter},
     {id: 'editor', title: 'Code Editor', icon: Terminal, component: CodeEditor},
