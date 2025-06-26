@@ -14,7 +14,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('timezone');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  
+
   const sections = [
     {id: 'timezone', title: 'Timezones', icon: Globe, component: TimezoneConverter},
     {id: 'editor', title: 'Code Editor', icon: Terminal, component: CodeEditor},
@@ -147,9 +147,12 @@ function App() {
           </div>
         </div>
       </div>
+      {/* Footer */}
+      <footer className="w-full text-center py-4 bg-white border-t mt-8 text-gray-600 text-sm">
+        © {new Date().getFullYear()} Deepak &mdash; Software Engineer
+      </footer>
     </div>
   );
 }
 
 export default App;
-

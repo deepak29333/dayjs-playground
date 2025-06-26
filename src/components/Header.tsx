@@ -27,7 +27,7 @@ const Header: React.FC = () => {
               Day.js Docs
             </a>
             <a
-              href="https://github.com/iamkun/dayjs"
+              href="https://github.com/deepak29333"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
