@@ -1,17 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, Play, RotateCcw, Copy, Check, AlertCircle, CheckCircle, Maximize2, Minimize2 } from 'lucide-react';
 import dayjs from 'dayjs';
+import dayOfYear from 'dayjs/plugin/dayOfYear';
+import isLeapYear from 'dayjs/plugin/isLeapYear';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
+import isoWeek from 'dayjs/plugin/isoWeek';
+import quarterOfYear from 'dayjs/plugin/quarterOfYear';
+import minMax from 'dayjs/plugin/minMax';
+import duration from 'dayjs/plugin/duration';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import MonacoEditor from '@monaco-editor/react';
 
 // Extend dayjs with plugins for the editor
+// (do this only once, before component definition)
+dayjs.extend(dayOfYear);
+dayjs.extend(isLeapYear);
+dayjs.extend(advancedFormat);
+dayjs.extend(weekOfYear);
+dayjs.extend(isoWeek);
+dayjs.extend(quarterOfYear);
+dayjs.extend(minMax);
+dayjs.extend(duration);
+dayjs.extend(customParseFormat);
+dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const CodeEditor: React.FC = () => {
   const [code, setCode] = useState(`// Welcome to the Day.js Code Editor!
+// All common Day.js plugins (e.g. localizedFormat, relativeTime, utc, timezone) are preloaded.
+// No need to import or require them—just use dayjs().
 // Try writing some Day.js code below:
 
 const now = dayjs();
@@ -26,6 +50,7 @@ console.log('Last week was:', lastWeek.fromNow());
 // Try different formats
 console.log('ISO format:', now.toISOString());
 console.log('Unix timestamp:', now.unix());
+console.log('Localized:', now.local().format('LLLL'));
 
 // Date manipulation
 const birthday = dayjs('1990-05-15');
@@ -199,160 +224,87 @@ try {
               onClick={toggleFullscreen}
               className="flex items-center gap-1 px-2 py-1.5 text-xs sm:text-sm text-gray-600 hover:text-gray-800 transition-colors"
             >
-              {fullscreen ? (
-                <>
-                  <Minimize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">Exit Fullscreen</span>
-                </>
-              ) : (
-                <>
-                  <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">Fullscreen</span>
-                </>
-              )}
+              {fullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              {fullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            </button>
+            <button
+              onClick={resetCode}
+              className="flex items-center gap-1 px-2 py-1.5 text-xs sm:text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <RotateCcw className="w-4 h-4" /> Reset
             </button>
             <button
               onClick={copyCode}
               className="flex items-center gap-1 px-2 py-1.5 text-xs sm:text-sm text-gray-600 hover:text-gray-800 transition-colors"
             >
-              {copied ? (
-                <>
-                  <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-600" />
-                  <span className="hidden sm:inline">Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">Copy</span>
-                </>
-              )}
-            </button>
-            <button
-              onClick={resetCode}
-              className="flex items-center gap-1 px-2 py-1.5 text-xs sm:text-sm bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors"
-            >
-              <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">Reset</span>
-            </button>
-            <button
-              onClick={runCode}
-              disabled={isRunning}
-              className="flex items-center gap-1 px-3 py-1.5 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white rounded-lg transition-colors text-xs sm:text-sm"
-            >
-              <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              {isRunning ? (
-                <>
-                  <span className="hidden sm:inline">Running...</span>
-                  <span className="sm:hidden">Run</span>
-                </>
-              ) : (
-                <>
-                  <span className="hidden sm:inline">Run Code</span>
-                  <span className="sm:hidden">Run</span>
-                </>
-              )}
+              {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />} Copy
             </button>
           </div>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-[400px] sm:h-[500px] md:h-[600px]">
-          {/* Code Input */}
-          <div className="border-b lg:border-b-0 lg:border-r border-gray-200">
-            <div className="h-full flex flex-col">
-              <div className="px-4 py-2 bg-gray-800 text-gray-200 text-sm font-medium">
-                JavaScript Code
-              </div>
-              <textarea
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                className="flex-1 w-full p-4 font-mono text-sm sm:text-base bg-gray-900 text-gray-100 resize-none focus:outline-none"
-                placeholder="Write your Day.js code here..."
-                spellCheck={false}
-              />
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-2/3 p-4 bg-gray-900">
+            <MonacoEditor
+              height={fullscreen ? '80vh' : '400px'}
+              language="javascript"
+              theme="vs-dark"
+              value={code}
+              onChange={value => setCode(value || '')}
+              options={{
+                fontSize: 16,
+                minimap: { enabled: false },
+                wordWrap: 'on',
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                formatOnType: true,
+                formatOnPaste: true,
+                tabSize: 2,
+                lineNumbers: 'on',
+                renderLineHighlight: 'all',
+                autoClosingBrackets: 'always',
+                autoClosingQuotes: 'always',
+                matchBrackets: 'always',
+                suggestOnTriggerCharacters: true,
+                quickSuggestions: true,
+                contextmenu: true,
+              }}
+            />
+            <div className="flex flex-wrap gap-2 mt-2">
+              {exampleSnippets.map((ex, i) => (
+                <button
+                  key={i}
+                  onClick={() => loadExample(ex)}
+                  className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded text-blue-800 font-mono"
+                >
+                  {ex.title}
+                </button>
+              ))}
             </div>
           </div>
-
-          {/* Output */}
-          <div className="h-full flex flex-col">
-            <div className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium flex items-center gap-2">
-              Output
-              {error && <AlertCircle className="w-4 h-4 text-red-500" />}
-              {!error && output.length > 0 && <CheckCircle className="w-4 h-4 text-green-500" />}
+          <div className="w-full md:w-1/3 p-4 bg-gray-50 border-l">
+            <div className="mb-2 flex items-center gap-2">
+              <Play className="w-4 h-4 text-blue-600" />
+              <span className="font-semibold text-gray-700">Output</span>
             </div>
-            <div className="flex-1 p-4 bg-gray-50 overflow-auto">
+            <div className="bg-white rounded p-3 min-h-[120px] font-mono text-sm text-gray-800 overflow-auto">
               {error ? (
-                <div className="text-red-600 font-mono text-sm bg-red-50 p-3 rounded border border-red-200">
-                  <div className="font-semibold mb-1">Error:</div>
+                <div className="flex items-center gap-2 text-red-600">
+                  <AlertCircle className="w-4 h-4" />
                   {error}
                 </div>
               ) : output.length > 0 ? (
-                <div className="space-y-1">
-                  {output.map((line, index) => (
-                    <div
-                      key={index}
-                      className={`font-mono text-sm sm:text-base ${
-                        line.startsWith('→') 
-                          ? 'text-blue-600 font-semibold bg-blue-50 p-2 rounded' 
-                          : line.startsWith('ERROR:')
-                          ? 'text-red-600 bg-red-50 p-2 rounded'
-                          : line.startsWith('WARN:')
-                          ? 'text-yellow-600 bg-yellow-50 p-2 rounded'
-                          : 'text-gray-700'
-                      }`}
-                    >
-                      {line}
-                    </div>
-                  ))}
-                </div>
+                output.map((line, i) => (
+                  <div key={i}>{line}</div>
+                ))
               ) : (
-                <div className="text-gray-500 text-sm italic">
-                  Output will appear here when you run your code...
-                </div>
+                <span className="text-gray-400">No output yet.</span>
               )}
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Example Snippets */}
-      <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Example Snippets</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {exampleSnippets.map((example, index) => (
-            <button
-              key={index}
-              onClick={() => loadExample(example)}
-              className="text-left p-3 sm:p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors border border-gray-200 hover:border-gray-300"
-            >
-              <div className="font-medium text-gray-900 mb-2">{example.title}</div>
-              <div className="text-xs sm:text-sm text-gray-600 font-mono bg-white p-2 rounded overflow-hidden">
-                {example.code.split('\n')[0]}...
+            {output.length > 0 && !error && (
+              <div className="flex items-center gap-2 mt-2 text-green-600">
+                <CheckCircle className="w-4 h-4" />
+                <span>Code ran successfully!</span>
               </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Tips */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 sm:p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">💡 Tips</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
-          <div>
-            <div className="font-medium mb-1">Available Functions:</div>
-            <ul className="space-y-1 text-xs sm:text-sm">
-              <li>• <code className="bg-white px-1 rounded">dayjs()</code> - Current date/time</li>
-              <li>• <code className="bg-white px-1 rounded">dayjs(string)</code> - Parse date string</li>
-              <li>• <code className="bg-white px-1 rounded">console.log()</code> - Print to output</li>
-              <li>• <code className="bg-white px-1 rounded">return value</code> - Show final result</li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-medium mb-1">Available Plugins:</div>
-            <ul className="space-y-1 text-xs sm:text-sm">
-              <li>• <code className="bg-white px-1 rounded">relativeTime</code> - .fromNow(), .to()</li>
-              <li>• <code className="bg-white px-1 rounded">utc</code> - .utc(), .local()</li>
-              <li>• <code className="bg-white px-1 rounded">timezone</code> - .tz() (limited)</li>
-            </ul>
+            )}
           </div>
         </div>
       </div>
