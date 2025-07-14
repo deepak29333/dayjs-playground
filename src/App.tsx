@@ -39,14 +39,14 @@ function App() {
       <Header/>
       <Analytics/>
       {/* Mobile Navigation Toggle */}
-      <div className="lg:hidden sticky top-0 z-40 bg-white shadow-md p-4">
+      <div className="lg:hidden sticky top-0 z-40 bg-white shadow-md px-4 py-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900 truncate mr-2">
             {sections.find(s => s.id === activeSection)?.title || 'Day.js Practice'}
           </h2>
           <button
             onClick={toggleMobileMenu}
-            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors flex-shrink-0"
           >
             {mobileMenuOpen ? <X className="w-5 h-5"/> : <Menu className="w-5 h-5"/>}
           </button>
@@ -54,7 +54,7 @@ function App() {
       </div>
 
       <div className="container mx-auto px-4 py-4 sm:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-8">
           {/* Mobile Navigation Menu - Overlay */}
           <div className={`
             lg:hidden fixed inset-0 z-30 bg-gray-900 bg-opacity-50 transition-opacity duration-300
@@ -64,11 +64,11 @@ function App() {
               fixed inset-y-0 left-0 w-3/4 max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out
               ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
-              <div className="p-4 overflow-y-auto max-h-screen">
+              <div className="p-3 sm:p-4 overflow-y-auto max-h-screen">
                 <LiveClock/>
 
-                <nav className="mt-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <nav className="mt-4 sm:mt-6">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
                     <Code className="w-5 h-5 text-blue-600"/>
                     Practice Areas
                   </h3>
@@ -79,13 +79,13 @@ function App() {
                         <button
                           key={section.id}
                           onClick={() => handleSectionChange(section.id)}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                          className={`w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-left transition-all duration-200 text-sm sm:text-base ${
                             activeSection === section.id
                               ? 'bg-blue-600 text-white shadow-md'
                               : 'text-gray-700 hover:bg-gray-100'
                           }`}
                         >
-                          <Icon className="w-5 h-5"/>
+                          <Icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"/>
                           {section.title}
                         </button>
                       );
@@ -102,7 +102,7 @@ function App() {
               <LiveClock/>
 
               <nav className="mt-6 bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <Code className="w-5 h-5 text-blue-600"/>
                   Practice Areas
                 </h3>

@@ -242,15 +242,15 @@ try {
           </div>
         </div>
         <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-2/3 p-4 bg-gray-900">
+          <div className="w-full md:w-2/3 p-2 sm:p-4 bg-gray-900">
             <MonacoEditor
-              height={fullscreen ? '80vh' : '400px'}
+              height={fullscreen ? '80vh' : '300px'}
               language="javascript"
               theme="vs-dark"
               value={code}
               onChange={value => setCode(value || '')}
               options={{
-                fontSize: 16,
+                fontSize: window.innerWidth < 640 ? 12 : 14,
                 minimap: { enabled: false },
                 wordWrap: 'on',
                 scrollBeyondLastLine: false,
@@ -268,32 +268,32 @@ try {
                 contextmenu: true,
               }}
             />
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-1 sm:gap-2 mt-2">
               {exampleSnippets.map((ex, i) => (
                 <button
                   key={i}
                   onClick={() => loadExample(ex)}
-                  className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded text-blue-800 font-mono"
+                  className="px-1.5 sm:px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded text-blue-800 font-mono"
                 >
                   {ex.title}
                 </button>
               ))}
             </div>
           </div>
-          <div className="w-full md:w-1/3 p-4 bg-gray-50 border-l">
+          <div className="w-full md:w-1/3 p-2 sm:p-4 bg-gray-50 border-l">
             <div className="mb-2 flex items-center gap-2">
               <Play className="w-4 h-4 text-blue-600" />
               <span className="font-semibold text-gray-700">Output</span>
             </div>
-            <div className="bg-white rounded p-3 min-h-[120px] font-mono text-sm text-gray-800 overflow-auto">
+            <div className="bg-white rounded p-2 sm:p-3 min-h-[120px] font-mono text-xs sm:text-sm text-gray-800 overflow-auto break-words">
               {error ? (
                 <div className="flex items-center gap-2 text-red-600">
                   <AlertCircle className="w-4 h-4" />
-                  {error}
+                  <span className="break-words">{error}</span>
                 </div>
               ) : output.length > 0 ? (
                 output.map((line, i) => (
-                  <div key={i}>{line}</div>
+                  <div key={i} className="break-words">{line}</div>
                 ))
               ) : (
                 <span className="text-gray-400">No output yet.</span>

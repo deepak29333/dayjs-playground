@@ -293,9 +293,9 @@ const TimezoneConverter: React.FC = () => {
                     value={fromSearchQuery}
                     onChange={(e) => setFromSearchQuery(e.target.value)}
                     placeholder="Search timezones..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-t-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-t-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
                   />
-                  <div className="max-h-60 overflow-auto">
+                  <div className="max-h-48 sm:max-h-60 overflow-auto">
                     {timezones.filter(tz => tz.label.toLowerCase().includes(fromSearchQuery.toLowerCase())).map((tz) => (
                       <div
                         key={tz.value}
@@ -304,7 +304,7 @@ const TimezoneConverter: React.FC = () => {
                           setFromDropdownOpen(false);
                           setFromSearchQuery('');
                         }}
-                        className="cursor-pointer select-none px-3 py-2 hover:bg-indigo-600 hover:text-white"
+                        className="cursor-pointer select-none px-3 py-2 hover:bg-indigo-600 hover:text-white text-sm break-words"
                       >
                         {tz.label}
                       </div>
@@ -336,9 +336,9 @@ const TimezoneConverter: React.FC = () => {
                     value={toSearchQuery}
                     onChange={(e) => setToSearchQuery(e.target.value)}
                     placeholder="Search timezones..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-t-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-t-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
                   />
-                  <div className="max-h-60 overflow-auto">
+                  <div className="max-h-48 sm:max-h-60 overflow-auto">
                     {timezones.filter(tz => tz.label.toLowerCase().includes(toSearchQuery.toLowerCase())).map((tz) => (
                       <div
                         key={tz.value}
@@ -347,7 +347,7 @@ const TimezoneConverter: React.FC = () => {
                           setToDropdownOpen(false);
                           setToSearchQuery('');
                         }}
-                        className="cursor-pointer select-none px-3 py-2 hover:bg-indigo-600 hover:text-white"
+                        className="cursor-pointer select-none px-3 py-2 hover:bg-indigo-600 hover:text-white text-sm break-words"
                       >
                         {tz.label}
                       </div>
@@ -361,29 +361,29 @@ const TimezoneConverter: React.FC = () => {
 
         <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Conversion Result</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Source Time</div>
-              <div className="text-2xl font-mono font-bold text-gray-900 mb-1">
+              <div className="text-xl sm:text-2xl font-mono font-bold text-gray-900 mb-1">
                 {inputDateTime.format('HH:mm:ss')}
               </div>
               <div className="text-sm text-gray-600 mb-2">
                 {inputDateTime.format('MMMM D, YYYY')}
               </div>
-              <div className="text-xs bg-white px-2 py-1 rounded text-indigo-600">
+              <div className="text-xs bg-white px-2 py-1 rounded text-indigo-600 break-words">
                 {fromTimezone.replace(/_/g, ' ')}
               </div>
             </div>
 
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Converted Time</div>
-              <div className="text-2xl font-mono font-bold text-indigo-600 mb-1">
+              <div className="text-xl sm:text-2xl font-mono font-bold text-indigo-600 mb-1">
                 {convertedDateTime.format('HH:mm:ss')}
               </div>
               <div className="text-sm text-gray-600 mb-2">
                 {convertedDateTime.format('MMMM D, YYYY')}
               </div>
-              <div className="text-xs bg-white px-2 py-1 rounded text-purple-600">
+              <div className="text-xs bg-white px-2 py-1 rounded text-purple-600 break-words">
                 {toTimezone.replace(/_/g, ' ')}
               </div>
             </div>
@@ -401,10 +401,10 @@ const TimezoneConverter: React.FC = () => {
               return (
                 <div key={tz.value}
                      className="bg-gray-50 rounded-lg p-4 text-center hover:bg-gray-100 transition-colors">
-                  <div className="font-medium text-gray-900 mb-1">
+                  <div className="font-medium text-gray-900 mb-1 text-sm sm:text-base break-words">
                     {tz.value.split('/').pop()?.replace(/_/g, ' ')}
                   </div>
-                  <div className="text-xl font-mono font-bold text-indigo-600 mb-1">
+                  <div className="text-lg sm:text-xl font-mono font-bold text-indigo-600 mb-1">
                     {time.format('HH:mm')}
                   </div>
                   <div className="text-sm text-gray-600">
@@ -494,9 +494,9 @@ const TimezoneConverter: React.FC = () => {
                     value={timestampSearchQuery}
                     onChange={(e) => setTimestampSearchQuery(e.target.value)}
                     placeholder="Search timezones..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-t-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-t-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
                   />
-                  <div className="max-h-60 overflow-auto">
+                  <div className="max-h-48 sm:max-h-60 overflow-auto">
                     {timezones.filter(tz => tz.label.toLowerCase().includes(timestampSearchQuery.toLowerCase())).map((tz) => (
                       <div
                         key={tz.value}
@@ -505,7 +505,7 @@ const TimezoneConverter: React.FC = () => {
                           setTimestampDropdownOpen(false);
                           setTimestampSearchQuery('');
                         }}
-                        className="cursor-pointer select-none px-3 py-2 hover:bg-indigo-600 hover:text-white"
+                        className="cursor-pointer select-none px-3 py-2 hover:bg-indigo-600 hover:text-white text-sm break-words"
                       >
                         {tz.label}
                       </div>
@@ -537,21 +537,21 @@ const TimezoneConverter: React.FC = () => {
 
                 return (
                   <div className="text-center">
-                    <div className="text-2xl font-mono font-bold text-teal-600 mb-1">
+                    <div className="text-xl sm:text-2xl font-mono font-bold text-teal-600 mb-1">
                       {date.format('HH:mm:ss')}
                     </div>
-                    <div className="text-lg text-gray-800 mb-2">
+                    <div className="text-base sm:text-lg text-gray-800 mb-2">
                       {date.format('dddd, MMMM D, YYYY')}
                     </div>
-                    <div className="text-xs bg-white px-2 py-1 rounded inline-block text-teal-600">
+                    <div className="text-xs bg-white px-2 py-1 rounded inline-block text-teal-600 break-words">
                       {timestampTimezone.replace(/_/g, ' ')}
                     </div>
                     <div className="mt-4 text-sm">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
-                        <div className="bg-white p-2 rounded">
+                      <div className="grid grid-cols-1 gap-2 text-left">
+                        <div className="bg-white p-2 rounded break-all">
                           <span className="text-gray-600">ISO Format:</span> {date.toISOString()}
                         </div>
-                        <div className="bg-white p-2 rounded">
+                        <div className="bg-white p-2 rounded break-words">
                           <span className="text-gray-600">Relative:</span> {date.fromNow()}
                         </div>
                       </div>
