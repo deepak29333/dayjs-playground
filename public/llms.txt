@@ -1,0 +1,46 @@
+# Day.js Playground
+
+> Free browser tools for converting, formatting, comparing, and calculating dates with Day.js.
+
+Day.js Playground is a free set of date and time tools that run in your browser. Convert time zones, turn Unix timestamps into calendar dates, format dates with Day.js tokens, add or subtract time, compare two dates, and run Day.js code without creating a project.
+
+Day.js is a small JavaScript date library with an API similar to Moment.js. These pages explain each tool in plain language and include a live calculator. Calculations run in the browser.
+
+## Tools
+
+- [Time Zone and Unix Timestamp Converter](https://dayjs-playground.vercel.app/timezone-converter): Convert a civil time between IANA time zones and decode Unix timestamps. Pick a date and time, choose a source time zone and a target time zone, and see the converted clock time. The world clock shows the same moment in UTC, New York, Los Angeles, London, Paris, Tokyo, Shanghai, and Sydney. Further down this page, the timestamp converter accepts a Unix timestamp in seconds or milliseconds and displays that instant in any IANA time zone.
+- [Date Formatter](https://dayjs-playground.vercel.app/date-formatter): See one date written with the Day.js format tokens you will use in code. Choose a date and compare common Day.js format strings side by side. Each row shows the token, a short name, and the formatted result you can copy. Patterns include ISO dates (YYYY-MM-DD), US and European numeric dates, long and short month names, 24-hour and 12-hour times, week numbers, and Unix time in seconds or milliseconds.
+- [Date Calculator](https://dayjs-playground.vercel.app/date-calculator): Add or subtract minutes, hours, days, weeks, months, or years from a date. Start from any calendar date, choose add or subtract, then enter an amount and a unit. The calculator uses Day.js add and subtract, so month and year steps follow calendar rules rather than a fixed number of hours. Quick examples cover tomorrow, yesterday, next week, next month, next year, and six months ago.
+- [Date Difference Calculator](https://dayjs-playground.vercel.app/date-difference): Compare two dates and read the gap in days, hours, and milliseconds. Enter two dates to see whether the first is before, after, or the same as the second. The calculator also shows date2.diff(date1) in days, hours, and milliseconds, and repeats the comparison by year, month, day, hour, and minute. A positive day count means the second date is later.
+- [Relative Time](https://dayjs-playground.vercel.app/relative-time): Describe a timestamp as “2 hours ago” or “in 3 days” with Day.js. Relative time describes a moment compared with now, or compared with another date. Pick a date and time to see fromNow() and to() update as the clock runs. The examples cover seconds, minutes, hours, days, weeks, months, and years in the past and in the future. The relativeTime plugin is what adds these methods to Day.js.
+- [Day.js Code Playground](https://dayjs-playground.vercel.app/code-playground): Run Day.js in the browser with the common plugins already loaded. The editor is a JavaScript scratchpad with Day.js in scope. You do not need import or require. Plugins already loaded include UTC, timezone, relativeTime, duration, customParseFormat, localizedFormat, advancedFormat, weekOfYear, isoWeek, quarterOfYear, dayOfYear, isLeapYear, and minMax. Run a snippet to print formatted dates, differences, and time zone conversions in the output panel.
+
+## Questions these pages answer
+
+- What is the Day.js Playground? (https://dayjs-playground.vercel.app/)
+- Do I need to install Day.js to use these tools? (https://dayjs-playground.vercel.app/)
+- Is the Day.js Playground free? (https://dayjs-playground.vercel.app/)
+- How is Day.js related to Moment.js? (https://dayjs-playground.vercel.app/)
+- How do I convert a time between time zones? (https://dayjs-playground.vercel.app/timezone-converter)
+- What is a Unix timestamp? (https://dayjs-playground.vercel.app/timezone-converter)
+- Why do two cities differ by a different number of hours in summer? (https://dayjs-playground.vercel.app/timezone-converter)
+- Which format tokens does Day.js use? (https://dayjs-playground.vercel.app/date-formatter)
+- How do I format a date as ISO 8601? (https://dayjs-playground.vercel.app/date-formatter)
+- How do I get a Unix timestamp from a date? (https://dayjs-playground.vercel.app/date-formatter)
+- How do I add days to a date? (https://dayjs-playground.vercel.app/date-calculator)
+- What happens when I add one month to 31 January? (https://dayjs-playground.vercel.app/date-calculator)
+- Which units can I add or subtract? (https://dayjs-playground.vercel.app/date-calculator)
+- How do I calculate the number of days between two dates? (https://dayjs-playground.vercel.app/date-difference)
+- What is the difference between isBefore and diff? (https://dayjs-playground.vercel.app/date-difference)
+- Does the day count include the end date? (https://dayjs-playground.vercel.app/date-difference)
+- What does fromNow() return? (https://dayjs-playground.vercel.app/relative-time)
+- How do I show “2 hours ago” in Day.js? (https://dayjs-playground.vercel.app/relative-time)
+- Which methods are available for relative time? (https://dayjs-playground.vercel.app/relative-time)
+- Can I run Day.js without installing it? (https://dayjs-playground.vercel.app/code-playground)
+- Which Day.js plugins are already loaded? (https://dayjs-playground.vercel.app/code-playground)
+- How do I print a value from my snippet? (https://dayjs-playground.vercel.app/code-playground)
+
+## Optional
+
+- [Day.js documentation](https://day.js.org/docs/en/parse/parse): Official Day.js parse, format, manipulate, and display docs.
+- [Source on GitHub](https://github.com/deepak29333): Author profile for this playground.

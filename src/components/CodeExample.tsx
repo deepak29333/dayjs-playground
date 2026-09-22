@@ -45,7 +45,7 @@ const CodeExample: React.FC<CodeExampleProps> = ({ title, code }) => {
       </div>
       <div className="p-4">
         <pre className="text-sm text-gray-300 overflow-x-auto">
-          <code>{code}</code>
+          <code suppressHydrationWarning>{code}</code>
         </pre>
       </div>
     </div>

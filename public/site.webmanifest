@@ -1,0 +1,18 @@
+{
+  "name": "Day.js Playground",
+  "short_name": "Day.js",
+  "description": "Free browser tools for time zones, Unix timestamps, date formatting, and Day.js code.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

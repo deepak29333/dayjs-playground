@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Github, ExternalLink } from 'lucide-react';
 
 const Header: React.FC = () => {
@@ -6,15 +7,15 @@ const Header: React.FC = () => {
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="container mx-auto px-4 py-4 sm:py-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <div className="p-2 bg-blue-600 rounded-lg">
-              <Calendar className="w-6 h-6 text-white" />
+              <Calendar className="w-6 h-6 text-white" aria-hidden="true" />
             </div>
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Day.js Practice</h1>
-              <p className="text-sm sm:text-base text-gray-600 hidden sm:block">Interactive learning playground for Day.js</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">Day.js Playground</p>
+              <p className="text-sm sm:text-base text-gray-600 hidden sm:block">Free date and time tools for Day.js</p>
             </div>
-          </div>
+          </Link>
           
           <div className="flex items-center gap-2 sm:gap-4">
             <a

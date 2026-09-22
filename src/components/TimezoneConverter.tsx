@@ -18,7 +18,6 @@ const TimezoneConverter: React.FC = () => {
   const [inputDate, setInputDate] = useState(dayjs().format('YYYY-MM-DDTHH:mm'));
   const [fromTimezone, setFromTimezone] = useState('America/New_York');
   const [toTimezone, setToTimezone] = useState('Asia/Tokyo');
-  const [timezones, setTimezones] = useState<Timezone[]>([]);
   const [fromSearchQuery, setFromSearchQuery] = useState('');
   const [toSearchQuery, setToSearchQuery] = useState('');
   const [fromDropdownOpen, setFromDropdownOpen] = useState(false);
@@ -34,8 +33,7 @@ const TimezoneConverter: React.FC = () => {
   const [timestampSearchQuery, setTimestampSearchQuery] = useState('');
   const timestampDropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Create and format the timezone list
+  const [timezones] = useState<Timezone[]>(() => {
     const timezonesList = [
       "Africa/Abidjan", "Africa/Accra", "Africa/Addis_Ababa", "Africa/Algiers", "Africa/Asmara",
       "Africa/Asmera", "Africa/Bamako", "Africa/Bangui", "Africa/Banjul", "Africa/Bissau",
@@ -180,7 +178,7 @@ const TimezoneConverter: React.FC = () => {
             label: `${label} (UTC${offsetFormatted})`,
             offset: offsetFormatted
           };
-        } catch (_) {
+        } catch {
           // Skip invalid timezones
           return null;
         }
@@ -194,11 +192,10 @@ const TimezoneConverter: React.FC = () => {
           return a.label.localeCompare(b.label);
         });
 
-      setTimezones(formattedTimezones);
+      return formattedTimezones;
     } catch (err) {
       console.error('Error processing timezones:', err);
-      // Fallback to a minimal list if there's an issue
-      const fallbackTimezones = [
+      return [
         {value: 'UTC', label: 'UTC (UTC+00:00)', offset: '+00:00'},
         {value: 'America/New_York', label: 'America / New York (UTC-05:00)', offset: '-05:00'},
         {value: 'America/Los_Angeles', label: 'America / Los Angeles (UTC-08:00)', offset: '-08:00'},
@@ -208,9 +205,8 @@ const TimezoneConverter: React.FC = () => {
         {value: 'Asia/Shanghai', label: 'Asia / Shanghai (UTC+08:00)', offset: '+08:00'},
         {value: 'Australia/Sydney', label: 'Australia / Sydney (UTC+10:00)', offset: '+10:00'},
       ];
-      setTimezones(fallbackTimezones);
     }
-  }, []);
+  });
 
   // Handle clicks outside the dropdown to close it
   useEffect(() => {
@@ -258,6 +254,12 @@ const TimezoneConverter: React.FC = () => {
           <Globe className="w-6 h-6 text-indigo-600"/>
           <h2 className="text-2xl font-bold text-gray-900">Timezone Conversion</h2>
         </div>
+        <p className="text-gray-600 mb-6 -mt-4">
+          <a href="#unix-timestamp" className="text-indigo-600 hover:text-indigo-700">
+            Convert a Unix timestamp
+          </a>{' '}
+          in seconds or milliseconds further down this page.
+        </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           <div>
@@ -268,6 +270,7 @@ const TimezoneConverter: React.FC = () => {
               type="datetime-local"
               value={inputDate}
               onChange={(e) => setInputDate(e.target.value)}
+              suppressHydrationWarning
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
@@ -364,7 +367,7 @@ const TimezoneConverter: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Source Time</div>
-              <div className="text-xl sm:text-2xl font-mono font-bold text-gray-900 mb-1">
+              <div className="text-xl sm:text-2xl font-mono font-bold text-gray-900 mb-1" suppressHydrationWarning>
                 {inputDateTime.format('HH:mm:ss')}
               </div>
               <div className="text-sm text-gray-600 mb-2">
@@ -377,7 +380,7 @@ const TimezoneConverter: React.FC = () => {
 
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Converted Time</div>
-              <div className="text-xl sm:text-2xl font-mono font-bold text-indigo-600 mb-1">
+              <div className="text-xl sm:text-2xl font-mono font-bold text-indigo-600 mb-1" suppressHydrationWarning>
                 {convertedDateTime.format('HH:mm:ss')}
               </div>
               <div className="text-sm text-gray-600 mb-2">
@@ -404,10 +407,10 @@ const TimezoneConverter: React.FC = () => {
                   <div className="font-medium text-gray-900 mb-1 text-sm sm:text-base break-words">
                     {tz.value.split('/').pop()?.replace(/_/g, ' ')}
                   </div>
-                  <div className="text-lg sm:text-xl font-mono font-bold text-indigo-600 mb-1">
+                  <div className="text-lg sm:text-xl font-mono font-bold text-indigo-600 mb-1" suppressHydrationWarning>
                     {time.format('HH:mm')}
                   </div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-600" suppressHydrationWarning>
                     {time.format('MMM D')}
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
@@ -430,7 +433,7 @@ const TimezoneConverter: React.FC = () => {
       <div className="bg-white rounded-xl shadow-lg p-6 mt-6">
         <div className="flex items-center gap-2 mb-6">
           <Globe className="w-6 h-6 text-indigo-600"/>
-          <h2 className="text-2xl font-bold text-gray-900">Timestamp to Date Converter</h2>
+          <h2 id="unix-timestamp" className="text-2xl font-bold text-gray-900">Timestamp to Date Converter</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
@@ -579,9 +582,9 @@ const TimezoneConverter: React.FC = () => {
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>Unix timestamp in seconds represents the number of seconds since January 1, 1970 (Unix Epoch)</li>
-            <li>Current Unix timestamp in seconds: <span className="font-mono">{Math.floor(Date.now() / 1000)}</span>
+            <li>Current Unix timestamp in seconds: <span className="font-mono" suppressHydrationWarning>{Math.floor(Date.now() / 1000)}</span>
             </li>
-            <li>Current Unix timestamp in milliseconds: <span className="font-mono">{Date.now()}</span></li>
+            <li>Current Unix timestamp in milliseconds: <span className="font-mono" suppressHydrationWarning>{Date.now()}</span></li>
           </ul>
         </div>
       </div>
