@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 17px;
+  }
+
+  body {
+    color: #1e293b;
+    line-height: 1.65;
+    background-color: #f4f7fb;
+  }
+}
+
+/* Secondary copy was too light on the page background. */
+.text-gray-500 {
+  color: #3d4a5c;
+}
+.text-gray-600 {
+  color: #334155;
+}
+.text-gray-700 {
+  color: #1e293b;
+}
+.text-gray-900 {
+  color: #0f172a;
+}

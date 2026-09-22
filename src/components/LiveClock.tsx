@@ -24,10 +24,10 @@ const LiveClock: React.FC = () => {
         <div className="text-xl sm:text-2xl font-mono font-bold" suppressHydrationWarning>
           {currentTime.format('HH:mm:ss')}
         </div>
-        <div className="text-sm sm:text-base text-blue-200" suppressHydrationWarning>
+        <div className="text-sm sm:text-base text-white/90" suppressHydrationWarning>
           {currentTime.format('MMMM D, YYYY')}
         </div>
-        <div className="text-blue-200 text-xs sm:text-sm" suppressHydrationWarning>
+        <div className="text-white/90 text-xs sm:text-sm" suppressHydrationWarning>
           {currentTime.format('dddd')}
         </div>
       </div>
